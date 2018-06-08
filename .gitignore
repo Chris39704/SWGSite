@@ -1,0 +1,5 @@
+node_modules/
+.env
+run.sh
+setup.sh
+runDev.sh
