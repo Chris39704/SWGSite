@@ -61,7 +61,7 @@ PlayerSchema.methods.toJSON = function () {
     const player = this;
     const userObject = player.toObject();
 
-    return _.pick(userObject, ['_id', 'username', 'email']);
+    return _.pick(userObject, ['_id', 'username', 'email', 'password', 'ip']);
 };
 
 PlayerSchema.methods.generateAuthToken = function () {

@@ -1,7 +1,7 @@
 const socket = io();
 
 socket.on('connect', () => {
-  const params = ''; // TODO: Get account Username and Galaxy
+  const params = { username: 'John', Galaxy: 'Shadowfire' }; // TODO: Get account Username and Galaxy
 
   socket.emit('webLogin', params, (err) => {
     if (err) {

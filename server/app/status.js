@@ -1,32 +1,32 @@
 class Status {
     constructor() {
-        this.users = [];
-        this.rooms = [];
+        this.players = [];
+        this.galaxies = [];
     }
-    addUser(id, name, room) {
-        const namesArray = this.users.map(user => user.name);
-        while ((namesArray.indexOf(name) > -1) && (this.rooms.indexOf(room) > -1)) {
-            name.concat(' #', namesArray.indexOf(name) + 1);
+    addPlayer(id, username, galaxy) {
+        const namesArray = this.players.map(player => player.username);
+        while ((namesArray.indexOf(username) > -1) && (this.galaxies.indexOf(galaxy) > -1)) {
+            username.concat(' #', namesArray.indexOf(username) + 1);
         }
-        const user = { id, name, room };
-        this.users.push(user);
-        this.rooms.push(room);
-        return user;
+        const player = { id, username, galaxy };
+        this.players.push(player);
+        this.galaxies.push(galaxy);
+        return player;
     }
-    removeUser(id) {
-        const user = this.getUser(id);
+    removePlayer(id) {
+        const player = this.getPlayer(id);
 
-        if (user) {
-            this.users = this.users.filter(user => user.id !== id);
+        if (player) {
+            this.players = this.players.filter(player => player.id !== id);
         }
-        return user;
+        return player;
     }
-    getUser(id) {
-        return this.users.filter(user => user.id === id)[0];
+    getPlayer(id) {
+        return this.players.filter(player => player.id === id)[0];
     }
-    getUserList(room) {
-        const users = this.users.filter(user => user.room === room);
-        const namesArray = users.map(user => user.name);
+    getPlayerList(galaxy) {
+        const players = this.players.filter(player => player.galaxy === galaxy);
+        const namesArray = players.map(player => player.username);
         return namesArray;
     }
 }

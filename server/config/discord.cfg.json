@@ -1,7 +1,6 @@
 {
     "autoRegistration": true,
     "discordBot": true,
-    "discordBotToken": "token",
     "discordBotChannelName": "status",
     "discordStatusInterval": 30,
     "restartServer": false,
