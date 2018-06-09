@@ -1,0 +1,14 @@
+{
+  "prod": {
+    "PORT": 80,
+    "ENV_HOST": "process.env.EXT_HOSTADDR",
+    "MONGODB_URI": "process.env.MONGODB_PROD",
+    "JWT_SECRET_PROD": "process.env.JWT_SECRET_PROD"
+  },
+  "dev": {
+    "PORT": 3001,
+    "ENV_HOST": "localhost",
+    "MONGODB_URI": "process.env.MONGODB_DEV",
+    "JWT_SECRET_DEV": "process.env.JWT_SECRET_DEV"
+  }
+}
