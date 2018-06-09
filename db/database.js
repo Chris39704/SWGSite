@@ -1,15 +1,17 @@
-(function () {
-    const mysql = require('mysql');
+const mysql = require('mysql');
 
-    const con = mysql.createConnection({
-        host: process.env.SQLDB_HOST,
-        database: process.env.SQLDB_NAME,
-        user: process.env.SQLDB_USER,
-        password: process.env.SQLDB_PASS,
-    });
-
-    // callback = function(err, user)
-    module.exports.getUser = function (username, callback) {
+const con = mysql.createConnection({
+    host: process.env.SQLDB_HOST,
+    database: process.env.SQLDB_NAME,
+    user: process.env.SQLDB_USER,
+    password: process.env.SQLDB_PASS,
+});
+class mySQLDB {
+    constructor() {
+        this.user = '';
+    }
+    getUser(username, callback) {
+        this.user = '';
         const sql = `SELECT * FROM user_account WHERE username = ${mysql.escape(username)}`;
         con.query(sql, (err, result) => {
             if (err == null) {
@@ -19,16 +21,16 @@
                 console.log(err);
             }
         });
-    };
-
-    // callback = function(err, user)
-    module.exports.createUser = function (username, password, email, callback) {
+    }
+    createUser(username, password, email, ip, callback) {
         const user = {
-            username, password_hash: password, password_salt: 'aaaa', accesslevel: 'standard',
+            username, password_hash: password, password_salt: process.env.SQLPW_SALT, accesslevel: 'standard',
         };
         con.query('INSERT INTO user_account SET ?', user, (err, result) => {
             if (err) throw err;
-            module.exports.getUser(username, callback);
+            this.getUser(username, callback);
         });
-    };
-}());
+    }
+}
+
+module.exports = { mySQLDB };
