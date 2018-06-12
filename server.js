@@ -13,6 +13,7 @@ const moment = require('moment');
 const http = require('http');
 // const https = require('https');
 const Discord = require('discord.js');
+var fs = require('fs');
 
 const port = process.env.PORT;
 const host = process.env.ENV_HOST;

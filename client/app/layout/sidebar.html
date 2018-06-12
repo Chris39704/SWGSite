@@ -1,0 +1,24 @@
+﻿<div data-swg-sidebar data-ng-controller="sidebar as vm">
+    <div class="sidebar-filler"></div>
+    <div class="sidebar-dropdown">
+        <a href="#">Menu</a>
+    </div>
+    <div class="sidebar-inner">
+        <div class="sidebar-widget">
+            <!--    <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control-md" id="searchInput" placeholder="Search" data-ng-model="vm.searchText" data-ng-keyup="vm.search($event)">
+                    <a class="btn btn-notext form-control-md" data-ng-click="vm.search($event)">
+                        <i class="fa fa-1x fa-search"></i>
+                    </a>
+                </div>
+            </form> -->
+        </div>
+
+        <ul class="navi">
+            <li class="nlightblue fade-selection-animation" data-ng-class="vm.isCurrent(r)" data-ng-repeat="r in vm.navRoutes">
+                <a href="#{{r.url}}" data-ng-bind-html="r.config.settings.content"></a>
+            </li>
+        </ul>
+    </div>
+</div>
