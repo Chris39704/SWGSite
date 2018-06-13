@@ -1,21 +1,35 @@
-﻿<nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-inner">
-        <div class="container">
-            <!-- Menu button for smallar screens -->
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            </a>
-            <!-- Site name for smallar screens -->
-            <h3 class="ss-logo svg-inline--fa">
-                <a class="text-light" href="/">
-                    <i class="fab fa-empire"></i> SWGSource NGE 2.0</a>
-            </h3>
-
-            <!-- Navigation starts -->
-            <div class="nav-collapse collapse">
-
-                <div class="fa-align-justify navbar-logo">
+﻿<div data-ng-controller="topNavCtrl as vm">
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand">
+            <i class="fab fa-2x fa-empire"></i> SWGSource</a>
+        <div ng-show="!vm.identity.isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+            <form class="form-inline my-2 my-lg-0">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" ng-model="vm.username" class="form-control mr-sm-2" style="max-width: 200px;" />
                 </div>
-            </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" ng-model="vm.password" class="form-control mr-sm-2" style="max-width: 200px;"
+                    />
+                </div>&nbsp;
+                <button ng-click="vm.signin(username, password)" class="btn btn-md btn-primary">Sign In</button>
+            </form>
         </div>
-    </div>
-</nav>
+        <form class="form-inline" ng-show="vm.identity.isAuthenticated()">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{vm.identity.currentUser.firstName + " " + vm.identity.currentUser.lastName}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item caret" href="/admin/users" data-ng-if="vm.identity.currentUser.isAdmin()">User Admin</a>
+                    <a class="dropdown-item caret" href="/profile">Profile</a>
+                    <a class="dropdown-item caret" href="#" data-ng-click="vm.signout()">Sign Out</a>
+                </div>
+            </li>
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        </form>
+    </nav>
+</div>

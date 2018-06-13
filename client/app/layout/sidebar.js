@@ -3,15 +3,15 @@
 
     var controllerId = 'sidebar';
     angular.module('app').controller(controllerId,
-        ['$location', '$route', 'config', 'routes', sidebar]);
+        ['$location', '$route', 'config', 'routes', '$scope', sidebar]);
 
-    function sidebar($location, $route, config, routes) {
+    function sidebar($location, $route, config, routes, $scope) {
         var vm = this;
         var keyCodes = config.keyCodes;
 
         vm.isCurrent = isCurrent;
-        vm.search = search;
-        vm.searchText = '';
+        // vm.search = search;
+        // vm.searchText = '';
 
         activate();
 
@@ -33,17 +33,22 @@
             return $route.current.title.substr(0, menuName.length) === menuName ? 'current' : '';
         }
 
-        function search($event) {
-            if ($event.keyCode === keyCodes.esc) {
-                vm.searchText = '';
-                return;
-            }
+        $scope.toggleSide = function () {
+            //e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        };
 
-            if ($event.type === 'click' || $event.keyCode === keyCodes.enter) {
-                var route = '/';
-                $location.path(route + vm.searchText);
-            }
-        }
+        /*  function search($event) {
+             if ($event.keyCode === keyCodes.esc) {
+                 vm.searchText = '';
+                 return;
+             }
+
+             if ($event.type === 'click' || $event.keyCode === keyCodes.enter) {
+                 var route = '/';
+                 $location.path(route + vm.searchText);
+             }
+         } */
 
     };
 })();
