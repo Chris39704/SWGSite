@@ -37,8 +37,9 @@
 
         function activate() {
             var promises = [];
+            /*  log('Activated Dashboard View'); */
             common.activateController(promises, controllerId)
-                .then(function () { log('Activated Dashboard View'); });
+                .then(function () { });
         }
 
         /*  function getAttendeeCount() {

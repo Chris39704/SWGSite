@@ -30,3 +30,5 @@
     }
   }
 });
+
+{/* <div data-ng-controller="topNavCtrl as vm"> */ }

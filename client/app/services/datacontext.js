@@ -46,7 +46,7 @@
 
             function success() {
                 //  setLookups();
-                log('Data Primed');
+                // log('Data Primed');
             }
 
         }

@@ -3,3 +3,4 @@ node_modules/
 run.sh
 setup.sh
 runDev.sh
+.plastic/

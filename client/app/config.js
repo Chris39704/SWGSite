@@ -4,8 +4,8 @@
     var app = angular.module('app');
 
     // Configure Toastr
-    toastr.options.timeOut = 4000;
-    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.options.timeOut = 5000;
+    toastr.options.positionClass = 'toast-top-right';
 
     var keyCodes = {
         backspace: 8,
@@ -26,8 +26,8 @@
     };
 
     var imageSettings = {
-        imageBasePath: '../content/images/screenshots/',
-        unknownPersonImageSource: 'unknown_person.jpg'
+        imageBasePath: '../content/images/profile/',
+        unknownPersonImageSource: 'unknown_default.jpg'
     };
 
     var events = {
@@ -49,7 +49,7 @@
     app.config(['$logProvider', function ($logProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
-            $logProvider.debugEnabled(true);
+            $logProvider.debugEnabled(false);
         }
     }]);
 

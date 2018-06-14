@@ -1,35 +1,197 @@
-﻿<div data-ng-controller="topNavCtrl as vm">
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand">
-            <i class="fab fa-2x fa-empire"></i> SWGSource</a>
-        <div ng-show="!vm.identity.isAuthenticated()">
-            <li class="nav-item">
-                <a class="nav-link" href="/signup">Sign Up</a>
-            </li>
-            <form class="form-inline my-2 my-lg-0">
-                <div class="form-group">
-                    <input type="email" placeholder="Email" ng-model="vm.username" class="form-control mr-sm-2" style="max-width: 200px;" />
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" ng-model="vm.password" class="form-control mr-sm-2" style="max-width: 200px;"
-                    />
-                </div>&nbsp;
-                <button ng-click="vm.signin(username, password)" class="btn btn-md btn-primary">Sign In</button>
-            </form>
+﻿<!--  <i class="fab fa-2x fa-empire"></i> SWGSource</a>
+            ng-show="!vm.identity.isAuthenticated()" -->
+<!-- <nav class="navbar navbar-default navbar-inverse" role="navigation">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Login Dropdown</a>
         </div>
-        <form class="form-inline" ng-show="vm.identity.isAuthenticated()">
+
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Link</a>
+                </li>
+                <li>
+                    <a href="#">Link</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" ng-show="vm.identity.isAuthenticated()" class="dropdown-toggle" data-toggle="dropdown">
+                        {{vm.identity.currentUser.firstName + " " + vm.identity.currentUser.lastName}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/profile">Profile</a>
+                        </li>
+                        <li>
+                            <a href="#">Another action</a>
+                        </li>
+                        <li>
+                            <a href="#">Something else here</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/admin/users" data-ng-if="vm.identity.currentUser.isAdmin()">User Admin</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" data-ng-click="vm.signout()">Sign Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <p class="navbar-text">Already have an account?</p>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <b>Login</b>
+                        <span class="caret"></span>
+                    </a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Login via
+                                    <div class="social-buttons">
+                                        <a href="#" class="btn btn-fb">
+                                            <i class="fa fa-facebook"></i> Facebook</a>
+                                        <a href="#" class="btn btn-tw">
+                                            <i class="fa fa-twitter"></i> Twitter</a>
+                                    </div>
+                                    or
+                                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputEmail2">Email Address</label>
+                                            <input type="email" class="form-control" ng-model="vm.username" id="exampleInputEmail2" placeholder="Email Address" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                            <input type="password" ng-model="vm.password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                            <div class="help-block text-right">
+                                                <a href="">Forgot Password</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button ng-click="vm.signin(username, password)" class="btn btn-primary btn-block">Sign in</button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Remember Username
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    New User?
+                                    <a href="/signup">
+                                        <b>Sign Up</b>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> -->
+<!-- Include the above in your HEAD tag -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">
+        <span class="sourceLogo">
+            <i class="fa fab fa-empire"></i> SWGSource</a>
+    </span>
+    <button class="navbar-toggler" type="button" data-target="#navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Forums</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Support</a>
+            </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{vm.identity.currentUser.firstName + " " + vm.identity.currentUser.lastName}}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item caret" href="/admin/users" data-ng-if="vm.identity.currentUser.isAdmin()">User Admin</a>
-                    <a class="dropdown-item caret" href="/profile">Profile</a>
-                    <a class="dropdown-item caret" href="#" data-ng-click="vm.signout()">Sign Out</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navdrop" role="button" data-toggle="dropdown" data-hover="dropdown">Admin </a>
+                <div class="dropdown-menu" style="background-color: rgba(223, 223, 223, 0.856);" aria-labelledby="navdrop">
+                    <a href="#" class="dropdown-item">Manage User Accounts</a>
+                    <a href="#" class="dropdown-item">Site Management</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">Console</a>
+                    <!-- <a href="#" class="dropdown-item"></a> -->
                 </div>
             </li>
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-        </form>
-    </nav>
-</div>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0" role="search">
+            <input type="text" class="form-control mr-sm-2" placeholder="Search">
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Submit</button>
+        </form> -->
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;">
+            <!-- IF NOT LOGGED IN SHOW THIS DROP DOWN -->
+            <li class="dropleft">
+                <a href="#" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown">
+                    <b>Login</b>&nbsp;
+                    <span class="caret"></span>
+                </a>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p></p>
+                                <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="exampleInputEmail2">Email Address</label>
+                                        <input type="email" class="form-control" ng-model="vm.username" id="exampleInputEmail2" placeholder="Email Address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                        <input type="password" ng-model="vm.password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                        <div class="help-block text-right">
+                                            <a href="" style="color: rgb(0, 26, 172) !important; font-weight: 600;">Forgot Password</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button ng-disabled="!vm.username || !vm.password" ng-click="vm.signin(username, password)" class="btn btn-fb btn-block">Sign in</button>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Remember Username
+                                            <!-- $('#checkBox').attr('checked'); -->
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="bottom text-center">
+                                New User?
+                                <a href="/signup">
+                                    <b>Sign Up</b>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
