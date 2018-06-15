@@ -3,23 +3,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    <div class="jumbotron">
+                        <!-- <hr class="my-4"> -->
+                    </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
-                    <div class="">
-                        <div allow-collapse="true"></div>
-                        <div class="">
-                            <div class="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="">
-                        <div allow-collapse="true"></div>
-                        <div class="text-center text-info">
-                            <!-- <carousel class="carousel-inner" interval="vm.pictures.interval">
+                <div allow-collapse="true"></div>
+                <div class="text-center text-info">
+                    <!-- <carousel class="carousel-inner" interval="vm.pictures.interval">
                                 <slide data-ng-repeat="s in vm.pictures.list" active="s.active">
                                     <img data-swg-img-player="{{s.imageSource}}" class="img-polaroid" height="320px;" width="270px;" style="border-radius: 20px; margin-left: 5%;"
                                     />
@@ -28,56 +20,27 @@
                                     </div>
                                 </slide>
                             </carousel> -->
-                        </div>
-                    </div>
-                    <div class="">
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row-fluid">
-                <div class="span4">
-                    <div class="">
-                        <div allow-collapse="true"></div>
-                        <div class="">
-                            <div class="">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <a data-ng-click="vm.content.setSort('track')" href="">Placeholder</a>
-                                            </th>
-                                            <th>
-                                                <a data-ng-click="vm.content.setSort('count')" href="">Guilds</a>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr data-ng-repeat="t in vm.content.tracks | orderBy:vm.content.predicate:vm.content.reverse">
-                                            <td>{{t.track}}</td>
-                                            <td>{{t.count}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="span8">
-                    <div class="">
-                        <div allow-collapse="true"></div>
-                        <div class="text-center text-info">
-                            <small>{{vm.news.description}}</small>
-                        </div>
-                        <div class="">
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <a data-ng-click="vm.content.setSort('track')" href="">Placeholder</a>
+                    </th>
+                    <th>
+                        <a data-ng-click="vm.content.setSort('count')" href="">Guilds</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="t in vm.content.tracks | orderBy:vm.content.predicate:vm.content.reverse">
+                    <td>{{t.track}}</td>
+                    <td>{{t.count}}</td>
+                </tr>
+            </tbody>
+        </table> -->
     </section>
 </section>

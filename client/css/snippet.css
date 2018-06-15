@@ -1,0 +1,98 @@
+button.snip1086 {
+  font-family: 'Raleway', Arial, sans-serif;
+  border: none;
+  background-color: #000000;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 10px 40px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  line-height: 1.5em;
+  font-weight: 700;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+  opacity: 1;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+button.snip1086 span {
+  display: inline-block;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  opacity: 0.6;
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+  border-radius: 10px;
+}
+button.snip1086 i {
+  text-align: center;
+  width: 68%;
+  top: 50%;
+  text-align: right;
+  display: block;
+  position: absolute;
+  font-size: 32px !important;
+  color: #347c2a !important;
+  text-shadow: 1px 1px 2px #3abd29;
+  opacity: 0;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+  border-radius: 10px;
+}
+button.snip1086:before {
+  content: '';
+  top: 0;
+  left: 50%;
+  right: 50%;
+  position: absolute;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.247);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+  border-radius: 10px;
+}
+button.snip1086:not([disabled]):hover span,
+button.snip1086:not([disabled]):hover span {
+  opacity: 1;
+  color: #41bd31;
+  font-weight: 700;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 10px;
+}
+button.snip1086:not([disabled]):hover i,
+button.snip1086:not([disabled]):hover i {
+  opacity: 1;
+}
+button.snip1086:not([disabled]):hover:before,
+button.snip1086:not([disabled]):hover:before {
+  left: 0px;
+  right: 0px;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+  border-radius: 10px;
+}
+button.snip1086:active:before {
+  background: rgba(255, 255, 255, 0.301);
+  left: 50%;
+  right: 50%;
+  border-radius: 10px;
+}
+button.snip1086.blue:not([disabled]) {
+  background-color: #688a8f;
+}
+button.snip1086.red:not([disabled]) {
+  background-color: #962d22;
+}
+button.snip1086.yellow:not([disabled]) {
+  background-color: #a85913;
+}
