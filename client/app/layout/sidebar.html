@@ -1,8 +1,8 @@
 ﻿<div data-ng-controller="sidebar as vm">
-    <ul id="sidebar_menu" class="sidebar-nav">
+    <ul id="sidebar_menu" class="sidebar-nav fixed-top" data-ng-if="vm.auth.isAuthenticated()">
         <li class="sidebar-brand">
             <a id="menu-toggle" style="text-shadow: none !important; height:100%;" data-ng-click="toggleSide()">
-                <i id="main_icon" class="fa fa-2x fa-align-justify fa-pull-right" style="margin-right: -15px !important;"></i>
+                <i id="main_icon" class="fas fa-2x fa-angle-double-left fa-pull-right" style="margin-right: -15px !important;"></i>
             </a>
         </li>
     </ul>

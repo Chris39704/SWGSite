@@ -22,6 +22,25 @@
         }
     }]);
 
+    app.directive('swgImgStaff', ['config', function (config) {
+        //Usage:
+        //<img data-cc-img-person="{{s.speaker.imageSource}}"/>
+        var basePath = config.imageSettingsStaff.imageBasePath;
+        var unknownImage = config.imageSettingsStaff.unknownPersonImageSource;
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            attrs.$observe('swgImgStaff', function (value) {
+                value = basePath + (value || unknownImage);
+                attrs.$set('src', value);
+            });
+        }
+    }]);
+
     app.directive('swgWidgetClose', function () {
         // Usage:
         // <a data-cc-widget-close></a>

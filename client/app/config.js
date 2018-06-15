@@ -30,6 +30,11 @@
         unknownPersonImageSource: 'unknown_default.jpg'
     };
 
+    var imageSettingsStaff = {
+        imageBasePath: '../content/images/staff/',
+        unknownPersonImageSource: 'unknown_default.jpg'
+    };
+
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
         spinnerToggle: 'spinner.toggle'
@@ -40,6 +45,7 @@
         docTitle: 'SWGSource: ',
         events: events,
         imageSettings: imageSettings,
+        imageSettingsStaff: imageSettingsStaff,
         keyCodes: keyCodes,
         version: '1.0.0'
     };

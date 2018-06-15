@@ -19,13 +19,17 @@
         vm.discord = {
             title: 'SWGSource'
         };
-        vm.pictures = {
+        vm.staffBio = {
             interval: 5000,
             list: [{
-                "imageSource": "vader.jpg",
-                "fullName": "Darth Vader"
+                "imageSource": "DevHawk.jpg",
+                // "firstName": "Cpt",
+                "lastName": "Hawk",
+                "bio": "Shadowfire EMU",
+                "position": "Developer",
+                "bioColor": "blue"
             }],
-            title: 'Top Rated Screenshots'
+            // title: 'Top Rated Screenshots'
         };
         vm.news = {
             title: 'SWGSource 2.0',

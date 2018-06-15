@@ -8,7 +8,7 @@
     //  - spinner
     var commonModule = angular.module('common', []);
 
-    // Must configure the common service and set its 
+    // Must configure the common service and set its
     // events via the commonConfigProvider
     commonModule.provider('commonConfig', function () {
         this.config = {
@@ -41,6 +41,7 @@
             debouncedThrottle: debouncedThrottle,
             isNumber: isNumber,
             logger: logger, // for accessibility
+            checkArrayForVal: checkArrayForVal,
             textContains: textContains
         };
 
@@ -55,6 +56,19 @@
 
         function $broadcast() {
             return $rootScope.$broadcast.apply($rootScope, arguments);
+        }
+
+        function checkArrayForVal(p_val) {
+            Array.prototype.in_array(p_val);
+            Array.prototype.in_array = function (p_val) {
+                for (var i = 0, l = this.length; i < l; i++) {
+                    if (this[i] === p_val) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
         }
 
         function createSearchThrottle(viewmodel, list, filteredList, filter, delay) {
@@ -74,7 +88,7 @@
                 // translates to ...
                 // vm.filteredSessions 
                 //      = vm.sessions.filter(function(item( { returns vm.sessionFilter (item) } );
-                viewmodel[filteredList] = viewmodel[list].filter(function(item) {
+                viewmodel[filteredList] = viewmodel[list].filter(function (item) {
                     return viewmodel[filter](item);
                 });
             };
@@ -85,7 +99,7 @@
                 var filterInputTimeout;
 
                 // return what becomes the 'applyFilter' function in the controller
-                return function(searchNow) {
+                return function (searchNow) {
                     if (filterInputTimeout) {
                         $timeout.cancel(filterInputTimeout);
                         filterInputTimeout = null;

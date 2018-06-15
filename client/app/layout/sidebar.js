@@ -3,15 +3,26 @@
 
     var controllerId = 'sidebar';
     angular.module('app').controller(controllerId,
-        ['$location', '$route', 'config', 'routes', '$scope', sidebar]);
+        ['$location', '$route', 'config', 'routes', '$scope', 'authIdentity', sidebar]);
 
-    function sidebar($location, $route, config, routes, $scope) {
+    function sidebar($location, $route, config, routes, $scope, authIdentity) {
         var vm = this;
         var keyCodes = config.keyCodes;
 
         vm.isCurrent = isCurrent;
         // vm.search = search;
         // vm.searchText = '';
+
+        var getLogFn = common.logger.getLogFn;
+        var log = getLogFn(controllerId);
+
+        var vm = this;
+
+        vm.auth = authIdentity;
+
+        if (!vm.auth || !vm.auth.isAuthenticated()) {
+            $("#wrapper").removeClass("active");
+        }
 
         activate();
 
@@ -36,6 +47,7 @@
         $scope.toggleSide = function () {
             //e.preventDefault();
             $("#wrapper").toggleClass("active");
+            $("#main_icon").toggleClass("fa-angle-double-left fa-angle-double-right");
         };
 
         /*  function search($event) {

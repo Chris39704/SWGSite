@@ -113,7 +113,7 @@
 </nav> -->
 <!-- Include the above in your HEAD tag -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a href="#" class="navbar-brand">
         <span class="sourceLogo">
             <i class="fa fab fa-empire"></i> SWGSource</a>
@@ -124,29 +124,35 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a href="#" class="nav-link">Home</a>
+                <a href="/" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">Forums</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Support</a>
+                <a href="https://shadowfireemu.freshdesk.com/support/login" class="nav-link">Support</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navdrop" role="button" data-toggle="dropdown" data-hover="dropdown">Admin </a>
+                <a class="nav-link dropdown-toggle" href="#" id="navdrop" role="button" data-toggle="dropdown" data-hover="dropdown">Useful Links </a>
                 <div class="dropdown-menu" style="background-color: rgba(199, 199, 199, 0.753);" aria-labelledby="navdrop">
-                    <a href="#" class="dropdown-item">Manage User Accounts</a>
-                    <a href="#" class="dropdown-item">Site Management</a>
+                    <a href="#" class="dropdown-item">SWGSource</a>
+                    <a href="http://swg.wikia.com/wiki/SWG_Wiki" class="dropdown-item">SWG Wiki</a>
+                    <a href="#" class="dropdown-item"></a>
                     <div class="dropdown-divider txt-dark"></div>
-                    <a href="#" class="dropdown-item">Console</a>
-                    <!-- <a href="#" class="dropdown-item"></a> -->
+                    <a href="#" class="dropdown-item-text ddLabel" ng-disabled="true">Craft</a>
+                    <div class="dropdown-divider txt-dark"></div>
+                    <a href="http://galaxyharvester.net/ghHome.py" class="dropdown-item">Galaxy Harvester</a>
+                    <a href="http://www.swgjunkyard.com/index.php" class="dropdown-item">SWG Junkyard</a>
+                    <a href="http://www.swgcraft.org/dev/home.php" class="dropdown-item">SWG Craft</a>
+                    <a href="http://www.swgpets.com/" class="dropdown-item">SWG Pets</a>
+                    <div class="dropdown-divider txt-dark"></div>
+                    <a href="#" class="dropdown-item-text ddLabel" ng-disabled="true">Utilities</a>
+                    <div class="dropdown-divider txt-dark"></div>
+                    <a href="http://www.oekevo.org/expertisecalculator/" class="dropdown-item">Expertise Calculator</a>
+                    <a href="#" class="dropdown-item"></a>
                 </div>
             </li>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0" role="search">
-            <input type="text" class="form-control mr-sm-2" placeholder="Search">
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Submit</button>
-        </form> -->
         <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;">
             <!-- IF NOT LOGGED IN SHOW THIS DROP DOWN -->
             <li class="dropleft">
