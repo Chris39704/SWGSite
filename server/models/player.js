@@ -30,8 +30,12 @@ const PlayerSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        require: true,
+        required: true,
         minlength: 6,
+    },
+    ip: {
+        type: String,
+        required: true,
     },
     tokens: [{
         access: {
@@ -39,6 +43,10 @@ const PlayerSchema = new mongoose.Schema({
             required: true,
         },
         token: {
+            type: String,
+            required: true,
+        },
+        ip: {
             type: String,
             required: true,
         }
@@ -49,14 +57,17 @@ PlayerSchema.methods.toJSON = function () {
     const player = this;
     const playerObject = player.toObject();
 
-    return _.pick(playerObject, ['_id', 'username', 'email']);
+    return _.pick(playerObject, ['_id', 'username', 'email', 'ip']);
 };
 
 PlayerSchema.methods.generateAuthToken = function () {
     const player = this;
     const access = 'auth';
+    const ip = player.ip;
     const token = jwt.sign({ _id: player._id.toHexString(), access }, process.env.JWT_SECRET).toString();
-    player.tokens.push({ access, token });
+    if (!player.tokens.token || player.tokens.token.length < 1) {
+        player.tokens.push({ access, token, ip });
+    }
 
     return player.save().then(() => { return token });
 };
@@ -113,7 +124,7 @@ PlayerSchema.pre('save', function (next) {
     const player = this;
 
     if (player.isModified('password')) {
-        bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.genSalt(15, (err, salt) => {
             bcrypt.hash(player.password, salt, (err, hash) => {
                 player.password = hash;
                 next();
