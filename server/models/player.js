@@ -49,6 +49,9 @@ const PlayerSchema = new mongoose.Schema({
         ip: {
             type: String,
             required: true,
+        },
+        role: {
+            type: String,
         }
     }]
 });
@@ -64,9 +67,9 @@ PlayerSchema.methods.generateAuthToken = function () {
     const player = this;
     const access = 'auth';
     const ip = player.ip;
-    const token = jwt.sign({ _id: player._id.toHexString(), access }, process.env.JWT_SECRET).toString();
-    if (!player.tokens.token || player.tokens.token.length < 1) {
-        player.tokens.push({ access, token, ip });
+    if (!player.tokens.token) {
+        const token = jwt.sign({ _id: player._id.toHexString(), access }, process.env.JWT_SECRET).toString();
+        player.tokens.push({ access, token, ip, role });
     }
 
     return player.save().then(() => { return token });

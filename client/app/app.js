@@ -42,10 +42,9 @@
                 templateUrl: 'app/user/userProfile.html',
                 resolve: routeRoleChecks.user
             })
-            .state('members', {
-                url: '/members',
-                templateUrl: 'app/dashboard/dashboard.html',
-                resolve: routeRoleChecks.user
+            .state('signup', {
+                url: '/signup',
+                templateUrl: 'app/auth/signup.html',
             })
             .state('server', {
                 url: '/server',

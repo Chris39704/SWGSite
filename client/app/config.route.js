@@ -76,10 +76,10 @@
                     },
                 }
             }, {
-                url: '/ssAdmin',
+                url: '/signup',
                 config: {
-                    title: 'Admin Login',
-                    templateUrl: 'app/admin/adminLogin.html',
+                    title: 'Sign Up',
+                    templateUrl: 'app/auth/signup.html',
                     settings: {},
                 }
             },

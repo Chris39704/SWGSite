@@ -12,12 +12,12 @@ const socketIO = require('socket.io');
 const moment = require('moment');
 const http = require('http');
 // const https = require('https');
-const Discord = require('discord.js');
+// const Discord = require('discord.js');
 var fs = require('fs');
 
 const port = process.env.PORT;
 const host = process.env.ENV_HOST;
-const client = new Discord.Client();
+// const client = new Discord.Client();
 
 // My Modules
 const { Todo } = require('./server/models/todo');
@@ -36,29 +36,19 @@ const server = http.createServer(app);
 const io = socketIO(server);
 const status = new Status();
 
-function dateFromUTSC(utscTime) {
-    const d = new Date(0);
-    d.setUTCSeconds(utscTime);
-    return d;
-}
-
-function readableTimeDiff(timeDiff) {
-    this.result = '';
-    if (timeDiff.days > 0) this.result += `${timeDiff.days} days, `;
-    if (timeDiff.hours > 0) this.result += `${timeDiff.hours} hours, `;
-    if (timeDiff.minutes > 0) this.result += `${timeDiff.minutes} minutes, `;
-    return `${this.result} ${timeDiff.seconds} seconds`;
-}
 
 app.use(bodyParser.json());
 app.use(express.json());
 
-const myPath = path.join(__dirname, './client');
-app.use(express.static(myPath));
+app.use('/', express.static(__dirname +  '/client'));
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/client/index.html'));
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const clusters = { clusterName: 'Shadowfire' };
+// const clusters = { clusterName: 'Shadowfire' };
 
 io.on('connection', (socket) => {
     socket.on('webLogin', (params, callback) => {
@@ -224,80 +214,7 @@ app.delete('/auth/players/me/token', authenticate, async (req, res) => {
 });
 
 
-// ---------------------------------------------------------------
 
-if (CONFIG.discordBot) {
-    // Status checker
-    try {
-        setInterval(() => {
-            Object.keys(clusters).forEach((clusterName) => {
-                const cluster = clusters[clusterName];
-                // if we haven't received an update in twice as long as the interval, the server isn't responding
-                if (Date.now() - cluster.clusterLastUpdate > (CONFIG.discordStatusInterval * 2 * 1000)) {
-                    cluster.clusterStatus = 'Offline';
-                    cluster.clusterLastLoad = {
-                        days: 0, hours: 0, minutes: 0, seconds: 0,
-                    };
-                    cluster.clusterUptime = {
-                        days: 0, hours: 0, minutes: 0, seconds: 0,
-                    };
-                    cluster.clusterPopulation = 0;
-                    cluster.clusterStartTime = null;
-                } else {
-                    cluster.clusterUptime = timediff(cluster.clusterStartTime, Date.now(), 'DHmS');
-                }
-            });
-        }, 5 * 1000);
-
-        client.on('ready', () => {
-            const channel = client.channels.find('name', CONFIG.discordBotChannelName);
-            setInterval(() => {
-                Object.keys(clusters).forEach((clusterName) => {
-                    const cluster = clusters[clusterName];
-                    // Do nothing if the channel wasn't found on this server
-                    if (!channel) return;
-                    channel.sendMessage(`**Cluster** ${clusterName} ` +
-                        `**Status** ${cluster.clusterStatus} ` +
-                        `**Players** ${cluster.clusterPopulation} ` +
-                        `**Last Load** ${readableTimeDiff(cluster.clusterLastLoad)} ago` +
-                        `**Uptime** ${readableTimeDiff(cluster.clusterUptime)} `);
-                });
-            }, CONFIG.discordStatusInterval * 1000);
-        });
-
-
-        client.login(process.env.discordBotToken);
-    } catch (e) {
-        // catch error
-    }
-}
-
-
-if (CONFIG.restartServer) {
-    const cp = require('child_process');
-    try {
-        setInterval(() => {
-            const cluster = clusters[CONFIG.restartClusterName];
-            if (cluster !== undefined) {
-                if (cluster.clusterStatus === 'Offline') {
-                    console.log('[****] Restarting server!!!');
-                    cp.exec(CONFIG.restartCommand, { cwd: CONFIG.restartWorkingPath }, (error, stdout, stderr) => { });
-                    if (CONFIG.discordBot) {
-                        const channel = client.channels.find('name', CONFIG.discordBotChannelName);
-                        // Do nothing if the channel wasn't found on this server
-                        if (!channel) return;
-                        channel.sendMessage(`@here **Restarting cluster ${CONFIG.restartClusterName} due to detected offline status!**`);
-                    }
-                }
-            } else {
-                console.log('[****] Starting server!!!');
-                cp.exec(CONFIG.restartCommand, { cwd: CONFIG.restartWorkingPath }, (error, stdout, stderr) => { });
-            }
-        }, 60 * 1000);
-    } catch (e) {
-        // Catch Restart Script Error
-    }
-}
 
 // ---------------------------------------------------------------
 
