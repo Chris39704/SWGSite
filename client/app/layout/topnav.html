@@ -1,119 +1,4 @@
-﻿<!--  <i class="fab fa-2x fa-empire"></i> SWGSource</a>
-            ng-show="!vm.identity.isAuthenticated()" -->
-<!-- <nav class="navbar navbar-default navbar-inverse" role="navigation">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Login Dropdown</a>
-        </div>
-
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">Link</a>
-                </li>
-                <li>
-                    <a href="#">Link</a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" ng-show="vm.identity.isAuthenticated()" class="dropdown-toggle" data-toggle="dropdown">
-                        {{vm.identity.currentUser.firstName + " " + vm.identity.currentUser.lastName}}
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="/profile">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Another action</a>
-                        </li>
-                        <li>
-                            <a href="#">Something else here</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/admin/users" data-ng-if="vm.identity.currentUser.isAdmin()">User Admin</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" data-ng-click="vm.signout()">Sign Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <p class="navbar-text">Already have an account?</p>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <b>Login</b>
-                        <span class="caret"></span>
-                    </a>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    Login via
-                                    <div class="social-buttons">
-                                        <a href="#" class="btn btn-fb">
-                                            <i class="fa fa-facebook"></i> Facebook</a>
-                                        <a href="#" class="btn btn-tw">
-                                            <i class="fa fa-twitter"></i> Twitter</a>
-                                    </div>
-                                    or
-                                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Email Address</label>
-                                            <input type="email" class="form-control" ng-model="vm.username" id="exampleInputEmail2" placeholder="Email Address" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                            <input type="password" ng-model="vm.password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                            <div class="help-block text-right">
-                                                <a href="">Forgot Password</a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button ng-click="vm.signin(username, password)" class="btn btn-primary btn-block">Sign in</button>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> Remember Username
-                                            </label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="bottom text-center">
-                                    New User?
-                                    <a href="/signup">
-                                        <b>Sign Up</b>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav> -->
-<!-- Include the above in your HEAD tag -->
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a href="#" class="navbar-brand">
         <span class="sourceLogo">
             <i class="fa fab fa-empire"></i> SWGSource</a>
@@ -127,33 +12,33 @@
                 <a href="/" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Forums</a>
+                <a href="#" target="_blank" class="nav-link">Forums</a>
             </li>
             <li class="nav-item">
-                <a href="https://shadowfireemu.freshdesk.com/support/login" class="nav-link">Support</a>
+                <a href="https://shadowfireemu.freshdesk.com/support/login" target="_blank" class="nav-link">Support</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" data-ng-if="vm.auth.isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="navdrop" role="button" data-toggle="dropdown" data-hover="dropdown">Useful Links </a>
                 <div class="dropdown-menu" style="background-color: rgba(199, 199, 199, 0.753);" aria-labelledby="navdrop">
-                    <a href="#" class="dropdown-item">SWGSource</a>
-                    <a href="http://swg.wikia.com/wiki/SWG_Wiki" class="dropdown-item">SWG Wiki</a>
-                    <a href="#" class="dropdown-item"></a>
+                    <a href="#" target="_blank" class="dropdown-item">SWGSource</a>
+                    <a href="http://swg.wikia.com/wiki/SWG_Wiki" target="_blank" class="dropdown-item">SWG Wiki</a>
+                    <a href="#" target="_blank" class="dropdown-item"></a>
                     <div class="dropdown-divider txt-dark"></div>
-                    <a href="#" class="dropdown-item-text ddLabel" ng-disabled="true">Craft</a>
+                    <a href="#" target="_blank" class="dropdown-item-text ddLabel" ng-disabled="true">Craft</a>
                     <div class="dropdown-divider txt-dark"></div>
-                    <a href="http://galaxyharvester.net/ghHome.py" class="dropdown-item">Galaxy Harvester</a>
-                    <a href="http://www.swgjunkyard.com/index.php" class="dropdown-item">SWG Junkyard</a>
-                    <a href="http://www.swgcraft.org/dev/home.php" class="dropdown-item">SWG Craft</a>
-                    <a href="http://www.swgpets.com/" class="dropdown-item">SWG Pets</a>
+                    <a href="http://galaxyharvester.net/ghHome.py" target="_blank" class="dropdown-item">Galaxy Harvester</a>
+                    <a href="http://www.swgjunkyard.com/index.php" target="_blank" class="dropdown-item">SWG Junkyard</a>
+                    <a href="http://www.swgcraft.org/dev/home.php" target="_blank" class="dropdown-item">SWG Craft</a>
+                    <a href="http://www.swgpets.com/" target="_blank" class="dropdown-item">SWG Pets</a>
                     <div class="dropdown-divider txt-dark"></div>
                     <a href="#" class="dropdown-item-text ddLabel" ng-disabled="true">Utilities</a>
                     <div class="dropdown-divider txt-dark"></div>
-                    <a href="http://www.oekevo.org/expertisecalculator/" class="dropdown-item">Expertise Calculator</a>
+                    <a href="http://www.oekevo.org/expertisecalculator/" target="_blank" class="dropdown-item">Expertise Calculator</a>
                     <a href="#" class="dropdown-item"></a>
                 </div>
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;">
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;" data-ng-show="!vm.auth.isAuthenticated()">
             <!-- IF NOT LOGGED IN SHOW THIS DROP DOWN -->
             <li class="dropleft">
                 <a href="#" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown">
@@ -200,6 +85,35 @@
                                 </a>
                             </div>
                         </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- IF USER IS LOGGED IN SHOW THIS DROP DOWN WITH THEIR NAME AND SIGN OUT OPTION -->
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;" data-ng-show="vm.auth.isAuthenticated()">
+            <!-- IF NOT LOGGED IN SHOW THIS DROP DOWN -->
+            <li class="dropleft">
+                <a href="#" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
+                    <b>{{vm.auth.currentUser.firstName + " " + vm.auth.currentUser.lastName}}</b>&nbsp;
+                    <span class="caret"></span>
+                </a>
+                <ul id="login-dp" class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a href="#">Option 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Option 3</a>
+                    </li>
+                    <li class="divider" data-ng-if="vm.auth.currentUser.isAdmin()"></li>
+                    <li>
+                        <a href="/admin/users" data-ng-if="vm.auth.currentUser.isAdmin()">User Admin</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#" data-ng-click="vm.signout()">Sign Out</a>
                     </li>
                 </ul>
             </li>

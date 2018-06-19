@@ -6,7 +6,7 @@
             </a>
         </li>
     </ul>
-    <ul class="sidebar-nav" id="sidebar">
+    <ul class="sidebar-nav" id="sidebar" data-ng-if="vm.auth.isAuthenticated()">
         <li class="fade-selection-animation" data-ng-class="vm.isCurrent(r)" data-ng-repeat="r in vm.navRoutes">
             <a href="{{r.url}}" data-ng-bind-html="r.config.settings.content"></a>
         </li>

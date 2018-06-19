@@ -3,9 +3,9 @@
 
     var controllerId = 'sidebar';
     angular.module('app').controller(controllerId,
-        ['$location', '$route', 'config', 'routes', '$scope', 'authIdentity', sidebar]);
+        ['$location', '$route', 'config', 'routes', '$scope', 'common', 'authIdentity', sidebar]);
 
-    function sidebar($location, $route, config, routes, $scope, authIdentity) {
+    function sidebar($location, $route, config, routes, $scope, common, authIdentity) {
         var vm = this;
         var keyCodes = config.keyCodes;
 

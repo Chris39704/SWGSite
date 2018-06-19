@@ -9,7 +9,7 @@
 
     var vm = this;
 
-    vm.identity = authIdentity;
+    vm.auth = authIdentity;
     vm.signin = function (username, password) {
       authService.authenticateUser(username, password).then(function (success) {
         if (success) {
