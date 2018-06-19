@@ -6,6 +6,8 @@
   function topNavCtrl(common, authIdentity, authService, $location) {
     var getLogFn = common.logger.getLogFn;
     var log = getLogFn(controllerId);
+    var logSuccess = common.logger.getLogFn(controllerId, 'success');
+    var logError = common.logger.getLogFn(controllerId, 'error');
 
     var vm = this;
 
@@ -13,9 +15,9 @@
     vm.signin = function (username, password) {
       authService.authenticateUser(username, password).then(function (success) {
         if (success) {
-          log('You have successfully signed in!');
+          logSuccess('Successfully Signed In!');
         } else {
-          log('Username/Password combination incorrect');
+          logError('Incorrect Username/Password');
         }
       });
     }
@@ -24,11 +26,10 @@
       authService.logoutUser().then(function () {
         vm.username = "";
         vm.password = "";
-        log('You have successfully signed out!');
+        logSuccess('Successfully Signed Out!');
         $location.path('/');
       })
     }
   }
-});
+})();
 
-{/* <div data-ng-controller="topNavCtrl as vm"> */ }

@@ -57,7 +57,7 @@ angular.module('app').factory('authService', ['$http', 'authIdentity', '$q', 'ss
             if (authIdentity.isAuthorized(role)) {
                 return true;
             } else {
-                console.log('not authorized');
+                console.log('Not Authorized');
                 return $q.reject('not authorized');
             }
 
@@ -67,7 +67,7 @@ angular.module('app').factory('authService', ['$http', 'authIdentity', '$q', 'ss
             if (authIdentity.isAuthenticated()) {
                 return true;
             } else {
-                console.log('not authorized');
+                console.log('Not Authorized');
                 return $q.reject('not authorized');
             }
         }

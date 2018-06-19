@@ -1,41 +1,24 @@
 <div class="container" data-ng-controller="userProfileCtrl as vm">
-    <div class="well">
-        <form name="profileForm" class="form-horizontal">
-            <fieldset>
-                <legend>User Profile</legend>
-                <div class="form-group">
-                    <label for="email" class="col-md-2 control-label">Email</label>
-                    <div class="col-md-10">
-                        <input name="email" type="email" placeholder="Email" ng-model="email" required="required" class="form-control" />
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="panel panel-default profile-area">
+                    <div class="bg-dark">
+                        <h3>{{ vm.profile.given_name }}'s Profile</h3>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="fname" class="col-md-2 control-label">First Name</label>
-                    <div class="col-md-10">
-                        <input name="fname" type="text" placeholder="First Name" ng-model="fname" required="required" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="lname" class="col-md-2 control-label">Last Name</label>
-                    <div class="col-md-10">
-                        <input name="lname" type="text" placeholder="Last Name" ng-model="lname" required="required" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-md-2 control-label">Password</label>
-                    <div class="col-md-10">
-                        <input name="password" type="password" placeholder="Password" ng-model="password" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10 col-md-offset-2">
-                        <div class="pull-right">
-                            <button ng-click="update()" ng-disabled="signupForm.$invalid" class="btn btn-primary">Submit</button>&nbsp;
-                            <a href="/" class="btn btn-default">Cancel</a>
+                    <div class="panel-body">
+                        <img ng-src="{{ vm.profile.picture }}" class="avatar" alt="avatar">
+                        <div>
+                            <label>
+                                <i class="glyphicon glyphicon-user"></i> Nickname</label>
+                            <h3 class="nickname">{{ vm.profile.nickname }}</h3>
                         </div>
+                        <pre class="full-profile">{{ vm.profile | json }}</pre>
                     </div>
                 </div>
-            </fieldset>
-        </form>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+            </div>
+        </div>
     </div>
 </div>

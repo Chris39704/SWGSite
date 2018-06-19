@@ -75,6 +75,13 @@
                         content: '<b>Server Info</b><i class="fa fa-2x fa-server fa-pull-right"></i>'
                     },
                 }
+            }, {
+                url: '/ssAdmin',
+                config: {
+                    title: 'Admin Login',
+                    templateUrl: 'app/admin/adminLogin.html',
+                    settings: {},
+                }
             },
         ];
 

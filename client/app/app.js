@@ -40,7 +40,7 @@
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'app/user/userProfile.html',
-                //   onEnter: checkForScopes(['premium'])
+                resolve: routeRoleChecks.user
             })
             .state('members', {
                 url: '/members',
@@ -52,6 +52,11 @@
                 templateUrl: 'app/dashboard/dashboard.html',
                 resolve: routeRoleChecks.admin
             })
+            .state('admin', {
+                url: '/ssAdmin',
+                templateUrl: 'app/admin/adminLogin.html',
+                resolve: routeRoleChecks.admin
+            })
             ;
 
 
@@ -61,6 +66,7 @@
             },
             whiteListedDomains: ['localhost']
         });
+
 
         $httpProvider.interceptors.push('jwtInterceptor');
         $urlRouterProvider.otherwise('/');
