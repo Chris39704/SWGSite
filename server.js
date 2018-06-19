@@ -185,7 +185,7 @@ app.patch('/todos/:id', authenticate, async (req, res) => {
 // POST /auth/players
 app.post('/auth/players', async (req, res) => {
     try {
-        const body = _.pick(req.body, ['username', 'email', 'password', 'ip']);
+        const body = _.pick(req.body, ['username', 'email', 'password']);
         const player = new Player(body);
         await player.save();
         const token = await player.generateAuthToken();

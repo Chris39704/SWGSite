@@ -33,14 +33,6 @@ const PlayerSchema = new mongoose.Schema({
         require: true,
         minlength: 6,
     },
-    ip: {
-        type: String,
-        require: true,
-        validate: {
-            validator: validator.isIP,
-            message: 'invalid IP Address {VALUE}',
-        },
-    },
     tokens: [{
         access: {
             type: String,
@@ -49,30 +41,24 @@ const PlayerSchema = new mongoose.Schema({
         token: {
             type: String,
             required: true,
-        },
-        ip: {
-            type: String,
-            required: true,
-        },
-    }],
+        }
+    }]
 });
 
 PlayerSchema.methods.toJSON = function () {
     const player = this;
-    const userObject = player.toObject();
+    const playerObject = player.toObject();
 
-    return _.pick(userObject, ['_id', 'username', 'email', 'password', 'ip']);
+    return _.pick(playerObject, ['_id', 'username', 'email']);
 };
 
 PlayerSchema.methods.generateAuthToken = function () {
     const player = this;
     const access = 'auth';
-    const { ip } = player;
-    const token = jwt.sign({ _id: player._id.toHexString(), access, ip }, process.env.JWT_SECRET).toString();
+    const token = jwt.sign({ _id: player._id.toHexString(), access }, process.env.JWT_SECRET).toString();
+    player.tokens.push({ access, token });
 
-    player.tokens.push({ access, token, ip });
-
-    return player.save().then(() => token);
+    return player.save().then(() => { return token });
 };
 
 PlayerSchema.methods.removeToken = function (token) {
@@ -98,7 +84,7 @@ PlayerSchema.statics.findByToken = function (token) {
     return Player.findOne({
         _id: decoded._id,
         'tokens.token': token,
-        'tokens.access': 'auth',
+        'tokens.access': 'auth'
     });
 };
 
@@ -127,7 +113,7 @@ PlayerSchema.pre('save', function (next) {
     const player = this;
 
     if (player.isModified('password')) {
-        bcrypt.genSalt(14, (err, salt) => {
+        bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(player.password, salt, (err, hash) => {
                 player.password = hash;
                 next();
