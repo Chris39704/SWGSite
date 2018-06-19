@@ -133,7 +133,7 @@ PlayerSchema.pre('save', function (next) {
                 next();
             });
         });
-        mySQLDB.createUser(player.username, player.password, player.email, player.ip);
+        //  mySQLDB.createUser(player.username, player.password, player.email, player.ip);
     } else {
         next();
     }
