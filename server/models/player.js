@@ -52,6 +52,7 @@ const PlayerSchema = new mongoose.Schema({
         },
         role: {
             type: String,
+            default: '',
         }
     }]
 });
@@ -60,19 +61,20 @@ PlayerSchema.methods.toJSON = function () {
     const player = this;
     const playerObject = player.toObject();
 
-    return _.pick(playerObject, ['_id', 'username', 'email', 'ip']);
+    return _.pick(playerObject, ['_id', 'username', 'email', 'ip', 'role']);
 };
 
 PlayerSchema.methods.generateAuthToken = function () {
     const player = this;
     const access = 'auth';
     const ip = player.ip;
-    if (!player.tokens.token) {
+    const role = player.role;
+    if (!player.tokens || player.tokens.length < 1) {
         const token = jwt.sign({ _id: player._id.toHexString(), access }, process.env.JWT_SECRET).toString();
         player.tokens.push({ access, token, ip, role });
+        return player.save().then(() => { return token });
     }
 
-    return player.save().then(() => { return token });
 };
 
 PlayerSchema.methods.removeToken = function (token) {
