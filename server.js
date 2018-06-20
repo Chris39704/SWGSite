@@ -40,11 +40,7 @@ const status = new Status();
 app.use(bodyParser.json());
 app.use(express.json());
 
-app.use('/', express.static(__dirname +  '/client'));
-
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/client/index.html'));
-});
+app.use('/', express.static(__dirname + '/client'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -215,6 +211,11 @@ app.delete('/auth/players/me/token', authenticate, async (req, res) => {
 
 
 
+// last render functionality to allow refreshing...
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/index.html'));
+});
 
 // ---------------------------------------------------------------
 
