@@ -41,8 +41,8 @@
     };
 
     var config = {
-        appErrorPrefix: '[SWGSource Error] ', //Configure the exceptionHandler decorator
-        docTitle: 'SWGSource: ',
+        appErrorPrefix: '[Shadowfire Error] ', //Configure the exceptionHandler decorator
+        docTitle: 'Shadowfire: ',
         events: events,
         imageSettings: imageSettings,
         imageSettingsStaff: imageSettingsStaff,

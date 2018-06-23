@@ -3,7 +3,15 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const bcrypt = require('bcryptjs');
+const { validation } = require('../middleware/validation');
 const { mySQLDB } = require('../../db/database');
+
+const valid = new validation();
+
+multiValidation = [
+    { validator: valid.nameExists, message: '{VALUE} Already Exists.' },
+    { validator: validator.isAlphanumeric, message: '{VALUE} is not a valid username' }
+];
 
 const PlayerSchema = new mongoose.Schema({
     username: {
@@ -12,10 +20,7 @@ const PlayerSchema = new mongoose.Schema({
         trim: true,
         minlength: 4,
         unique: true,
-        validate: {
-            validator: validator.isAlphanumeric,
-            message: '{VALUE} is not a valid username',
-        },
+        validate: { validator: validator.isAlphanumeric, message: '{VALUE} is not a valid username' },
     },
     email: {
         type: String,

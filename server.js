@@ -27,10 +27,11 @@ app.use('/', express.static(__dirname + '/client'));
 
 app.use(function (req, res, next) {
     // res.setHeader('Access-Control-Allow-Origin', '*');
-    if (req.url.substr(req.url.length - 5) == '.html') {
-        return null;
+    if (req.url.indexOf(`/auth/`) === -1 && req.url.indexOf(`/todos/`) === -1) {
+        res.setHeader('Content-Type', 'text/html');
+    } else {
+        res.setHeader('Content-Type', 'application/json');
     }
-    res.setHeader('Content-Type', 'application/json');
     // res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
     next();

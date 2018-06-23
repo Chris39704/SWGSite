@@ -121,7 +121,6 @@ module.exports = function (app) {
                 req.headers["x-forwarded-for"] ||
                 '').split(',')[0] ||
                 req.client.remoteAddress;
-            req.body.username = req.body.username.toLowerCase();
             req.body.email = req.body.email.toLowerCase();
             const body = _.pick(req.body, ['username', 'email', 'password', 'ip']);
             const player = new Player(body);
@@ -141,7 +140,7 @@ module.exports = function (app) {
     app.post('/auth/players/login', async (req, res) => {
         try {
             const body = _.pick(req.body, ['username', 'password']);
-            const player = await Player.findByCredentials(body.username.toLowerCase(), body.password);
+            const player = await Player.findByCredentials(body.username, body.password);
             if (player.tokens.length > 0) {
                 player.tokens.pop();
             }
