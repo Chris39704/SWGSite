@@ -7,8 +7,10 @@
         var getLogFn = common.logger.getLogFn;
         var logSuccess = common.logger.getLogFn(controllerId, 'success');
         var logError = common.logger.getLogFn(controllerId, 'error');
+        var session = common.setSession;
 
         var vm = this;
+        vm.signup = signup;
 
         activate();
 
@@ -19,14 +21,20 @@
         }
 
         vm.auth = authIdentity;
-        vm.signup = function (username, email, password) {
-            var userData = { username, email, password };
+        function signup(user) {
+            var userData = { username: user.username, email: user.email, password: user.password };
             authService.createUser(userData).then(function (success) {
                 if (success) {
-                    logSuccess('Successfully Signed In!');
+                    logSuccess('Account Created. Pending Email Verification.');
                     $location.path('/');
-                } else {
-                    logError('Incorrect Username/Password');
+                } /* else {
+                    logError('Error: Invalid Credentials');
+                } */
+            }, function (error) {
+                if (error.data.errmsg.indexOf('E11000') > -1) {
+                    logError(`Error: ${error.resource.username}`);
+                } if (error.data.errmsg.indexOf('E11000') === -1) {
+                    logError(`Unknown Error: ${error.statusText}`);
                 }
             });
         }

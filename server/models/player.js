@@ -37,6 +37,15 @@ const PlayerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    created: {
+        type: Date,
+        required: true,
+        default: Date.now,
+    },
+    role: {
+        type: String,
+        default: 'user',
+    },
     tokens: [{
         access: {
             type: String,
@@ -46,13 +55,10 @@ const PlayerSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        ip: {
-            type: String,
+        issued: {
+            type: Date,
             required: true,
-        },
-        role: {
-            type: String,
-            default: '',
+            default: Date.now,
         }
     }]
 });
@@ -61,7 +67,7 @@ PlayerSchema.methods.toJSON = function () {
     const player = this;
     const playerObject = player.toObject();
 
-    return _.pick(playerObject, ['_id', 'username', 'email', 'ip', 'role']);
+    return _.pick(playerObject, ['_id', 'username', 'email', 'ip', 'created', 'role']);
 };
 
 PlayerSchema.methods.generateAuthToken = function () {
@@ -74,7 +80,6 @@ PlayerSchema.methods.generateAuthToken = function () {
         player.tokens.push({ access, token, ip, role });
         return player.save().then(() => { return token });
     }
-
 };
 
 PlayerSchema.methods.removeToken = function (token) {
@@ -106,9 +111,9 @@ PlayerSchema.statics.findByToken = function (token) {
 
 PlayerSchema.statics.findByCredentials = function (username, password) {
     const Player = this;
-
     return Player.findOne({ username }).then((player) => {
         if (!player) {
+            console.log(`${username} Not Found`);
             return Promise.reject();
         }
 

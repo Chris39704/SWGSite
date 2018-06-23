@@ -13,7 +13,9 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" id="InputUser" ng-model="vm.user.username" aria-describedby="userHelp" placeholder="Username"
                                     required>
-                                <small id="userHelp" class="form-text text-muted">Used to Sign into SWG.</small>
+                                <small id="userHelp" class="form-text text-muted">
+                                    <span style="background-color: rgba(0, 0, 0, 0.514); border-radius: 15px; padding-left: 10px; padding-right: 10px;">Used to Sign into SWG.</span>
+                                </small>
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control" id="InputEmail" ng-model="vm.user.email" aria-describedby="emailHelp" placeholder="Email Address"
@@ -27,8 +29,8 @@
                                 <input type="password" class="form-control" id="InputPassword" ng-model="vm.confPassword" placeholder="Confirm Password"
                                     required>
                             </div>
-                            <button class="btn btn-dark btn-outline-success" ng-disabled="!vm.user.username || !vm.user.email || !vm.user.password || vm.user.password !== vm.confPassword"
-                                ng-click="createUser(vm.user)">Submit</button>
+                            <button class="btn btn-dark btn-outline-success" ng-disabled="!vm.user.username || (vm.user.username.length < 4) || !vm.user.email || !vm.user.password || (vm.user.password.length < 6) || vm.user.password !== vm.confPassword"
+                                ng-click="vm.signup(vm.user)">Submit</button>
                         </form>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">

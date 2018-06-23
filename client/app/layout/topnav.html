@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a href="#" class="navbar-brand">
             <span class="sourceLogo">
-                <i class="fa fab fa-empire"></i> SWGSource</a>
+                <i class="fa fab fa-jedi-order"></i> Shadowfire</a>
         </span>
         <button class="navbar-toggler" type="button" data-target="#navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button ng-disabled="!vm.username || !vm.password" ng-click="vm.signin(username, password)" class="snip1086 blue" style="display: inline;">
+                                            <button ng-disabled="!vm.username || !vm.password" ng-click="vm.signin(vm.username, vm.password)" class="snip1086 blue" style="display: inline;">
                                                 <span>Sign in</span>
                                                 <i class="icon ion-md-checkmark"></i>
                                             </button>
@@ -92,29 +92,27 @@
             </ul>
             <!-- IF USER IS LOGGED IN SHOW THIS DROP DOWN WITH THEIR NAME AND SIGN OUT OPTION -->
             <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;" data-ng-show="vm.auth.isAuthenticated()">
-                <!-- IF NOT LOGGED IN SHOW THIS DROP DOWN -->
                 <li class="dropleft">
                     <a href="#" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown">
-                        <b>{{vm.auth.currentUser.firstName + " " + vm.auth.currentUser.lastName}}</b>&nbsp;
+                        <b>{{vm.auth.currentUser.username}}</b>&nbsp;
                         <span class="caret"></span>
                     </a>
-                    <ul id="login-dp" class="dropdown-menu" role="menu">
+                    <ul id="login-dp" class="dropdown-menu">
                         <li>
-                            <a href="/profile">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Option 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Option 3</a>
-                        </li>
-                        <li class="divider" data-ng-if="vm.auth.currentUser.isAdmin()"></li>
-                        <li>
-                            <a href="/admin/users" data-ng-if="vm.auth.currentUser.isAdmin()">User Admin</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" data-ng-click="vm.signout()">Sign Out</a>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <a href="#" target="_blank" class="dropdown-item">Placeholder</a>
+                                    <a href="#" target="_blank" class="dropdown-item">Placeholder</a>
+                                    <div class="dropdown-divider txt-dark" data-ng-if="vm.auth.currentUser.isAdmin()"></div>
+                                    <a href="#" target="_blank" class="dropdown-item-text ddLabel" ng-disabled="true" data-ng-if="vm.auth.currentUser.isAdmin()">Admin</a>
+                                    <div class="dropdown-divider txt-dark" data-ng-if="vm.auth.currentUser.isAdmin()"></div>
+                                    <a href="#" target="_blank" class="dropdown-item" data-ng-if="vm.auth.currentUser.isAdmin()">Admin Dashboard</a>
+                                    <div class="dropdown-divider txt-dark"></div>
+                                    <a href="#" class="dropdown-item" data-ng-click="vm.signout()">Sign Out</a>
+                                    <br/>
+                                    <!-- <a href="#" class="dropdown-item"></a> -->
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </li>

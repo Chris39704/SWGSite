@@ -5,7 +5,7 @@ const authenticate = (req, res, next) => {
 
     Player.findByToken(token).then((player) => {
         if (!player) {
-            return Promise.reject();
+            return Promise.reject(new Error('Invalid User'));
         }
 
         req.player = player;

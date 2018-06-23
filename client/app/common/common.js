@@ -42,7 +42,9 @@
             isNumber: isNumber,
             logger: logger, // for accessibility
             checkArrayForVal: checkArrayForVal,
-            textContains: textContains
+            textContains: textContains,
+            setSession: setSession,
+            isNotExpired: isNotExpired,
         };
 
         return service;
@@ -94,7 +96,7 @@
             };
 
             return (function () {
-                // Wrapped in outer IFFE so we can use closure 
+                // Wrapped in outer IFFE so we can use closure
                 // over filterInputTimeout which references the timeout
                 var filterInputTimeout;
 
@@ -125,6 +127,29 @@
             } else {
                 throttles[key] = $timeout(callback, delay);
             }
+        }
+
+        function setSession(token) {
+
+            if (localStorage.getItem('x-auth') || localStorage.getItem('expires_at')) {
+                localStorage.removeItem('x-auth');
+                localStorage.removeItem('expires_at');
+            }
+
+            //Comment SET STORAGE TOKEN
+            // Set the time that the access token will expire at
+            var expiresAt = JSON.stringify((5400 * 1000) + new Date().getTime());
+            localStorage.setItem('x-auth', token);
+            localStorage.setItem('expires_at', expiresAt);
+        }
+
+        function isNotExpired() {
+            // Check whether the current time is past the
+            // access token's expiry time
+            let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+            if (new Date().getTime() < expiresAt) {
+                return true;
+            } else { return false; };
         }
 
         function isNumber(val) {

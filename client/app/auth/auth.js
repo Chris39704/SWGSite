@@ -1,17 +1,48 @@
-angular.module('app').factory('authService', ['$http', 'authIdentity', '$q', 'ssUser', function ($http, authIdentity, $q, ssUser) {
+angular.module('app').factory('authService', ['$http', 'authIdentity', '$q', 'ssUser', 'common', function ($http, authIdentity, $q, ssUser, common) {
+
+    var getLogFn = common.logger.getLogFn;
+    var log = getLogFn('topNavCtrl');
+    var logSuccess = common.logger.getLogFn('topNavCtrl', 'success');
+    var logError = common.logger.getLogFn('topNavCtrl', 'error');
+
 
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer();
-            $http.post('/login', { username: username, password: password }).then(function (response) {
-                if (response.data.success) {
+            $http.post('/auth/players/login', { username: username, password: password }).then(function (response) {
+                if (response.data) {
                     var user = new ssUser();
-                    angular.extend(user, response.data.user);
+                    angular.extend(user, response.data);
+                    authIdentity.currentUser = user;
+                    let token = response.headers('x-auth');
+                    common.setSession(token);
+                    dfd.resolve(true);
+                }
+            }, function (error) {
+                if (error.status == 400)
+                    logError(`Error: ${error.status}, User Not Found`);
+                else if (error.status != 400)
+                    logError(`Error: ${error.statusText}`);
+
+                dfd.resolve(false);
+            });
+            return dfd.promise;
+        },
+
+        getUserInfo: function () {
+            var dfd = $q.defer();
+            $http.get('/auth/players/me').then(function (response) {
+                if (response.data) {
+                    console.log(response.data);
+                    var user = new ssUser();
+                    angular.extend(user, response.data);
                     authIdentity.currentUser = user;
                     dfd.resolve(true);
-                } else {
-                    dfd.resolve(false);
                 }
+            }, function (error) {
+                if (error.statusText)
+                    logError(`Error: ${error.statusText}`);
+                dfd.resolve(false);
             });
             return dfd.promise;
         },
@@ -21,15 +52,13 @@ angular.module('app').factory('authService', ['$http', 'authIdentity', '$q', 'ss
             var dfd = $q.defer();
 
             newUser.$save().then(function () {
-                authIdentity.currentUser = newUser;
-                dfd.resolve();
+                dfd.resolve(true);
             }, function (response) {
-                dfd.reject(response.data.reason);
+                if (response.data.code)
+                    dfd.reject('Error: Duplicate Username/Email.');
             });
-
             return dfd.promise;
         },
-
         updateCurrentUser: function (newUserData) {
             var dfd = $q.defer();
 
@@ -37,39 +66,41 @@ angular.module('app').factory('authService', ['$http', 'authIdentity', '$q', 'ss
             angular.extend(clone, newUserData);
             clone.$update().then(function () {
                 authIdentity.currentUser = clone;
-                dfd.resolve();
+                dfd.resolve(true);
             }, function (response) {
                 dfd.reject(response.data.reason);
             });
             return dfd.promise;
         },
-
         logoutUser: function () {
             var dfd = $q.defer();
-            $http.post('/logout', { logout: true }).then(function () {
+            $http.delete('/auth/players/me/token').then(function (response) {
                 authIdentity.currentUser = undefined;
-                dfd.resolve();
+                localStorage.removeItem('x-auth');
+                localStorage.removeItem('expires_at');
+                dfd.resolve(true);
+            }, function (error) {
+                logError(error);
+                dfd.reject(error);
             });
             return dfd.promise;
         },
         authorizeCurrentUserForRoute: function (role) {
-            console.log('checking');
-            if (authIdentity.isAuthorized(role)) {
+            if (authIdentity.isAuthorized(role) && isNotExpired) {
                 return true;
             } else {
-                console.log('Not Authorized');
+                logError('Not Authorized');
                 return $q.reject('not authorized');
             }
 
         },
         authorizeAuthenticatedUserForRoute: function () {
-            console.log('checking');
-            if (authIdentity.isAuthenticated()) {
+            if (authIdentity.isAuthenticated() && common.isNotExpired) {
                 return true;
             } else {
-                console.log('Not Authorized');
+                logError('Not Authorized');
                 return $q.reject('not authorized');
             }
-        }
+        },
     }
 }]);

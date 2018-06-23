@@ -61,8 +61,11 @@
 
         jwtOptionsProvider.config({
             tokenGetter: function () {
-                return localStorage.getItem('access_token');
+                return localStorage.getItem('x-auth');
             },
+            authPrefix: '',
+            authHeader: 'x-auth',
+            unauthenticatedRedirectPath: '/',
             whiteListedDomains: ['localhost']
         });
 

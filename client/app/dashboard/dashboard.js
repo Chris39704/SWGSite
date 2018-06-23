@@ -46,13 +46,6 @@
                 .then(function () { });
         }
 
-        /*  function getAttendeeCount() {
-             return datacontext.getAttendeeCount().then(function(data) {
-                 return vm.attendeeCount = data;
-             });
-         } */
-
-
         function setContentSort(prop) {
             vm.content.predicate = prop;
             vm.content.reverse = !vm.content.reverse;

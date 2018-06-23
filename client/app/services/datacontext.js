@@ -3,9 +3,9 @@
 
     var serviceId = 'datacontext';
     angular.module('app').factory(serviceId,
-        ['common', datacontext]);
+        ['common', 'authIdentity', 'authService', datacontext]);
 
-    function datacontext(common) {
+    function datacontext(common, authIdentity, authService) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(serviceId);
         var logError = getLogFn(serviceId, 'error');
@@ -16,23 +16,27 @@
         var storeMeta = {
             isLoaded: {
                 sessions: false,
-                attendees: false
+                player: false
             }
         };
 
         var service = {
-            // getAttendeeCount: getAttendeeCount,
-            // getAttendees: getAttendees,
+            // getPlayerCount: getPlayerCount,
+            getPlayerInfo: getPlayerInfo,
             prime: prime
         };
 
         return service;
 
-        function getAttendees(forceRemote) {
+        function getPlayerInfo(forceRemote) {
 
-            if (_areAttendeesLoaded() && !forceRemote) {
-                // Get the page of attendees from local cache
-                return $q.when();
+            if (_isPlayerLoaded() && !forceRemote) {
+                let playerInfo = authIdentity.currentUser;
+                return $q.when(playerInfo);
+            }
+            if (!forceRemote) {
+                let player = authService.getUserInfo();
+                return $q.when(player);
             }
         }
 
@@ -45,19 +49,16 @@
             return primePromise;
 
             function success() {
-                //  setLookups();
-                // log('Data Primed');
+                // setLookups();
             }
 
         }
 
-        function _getAllLocal(resource, ordering, predicate) {
-            return EntityQuery.from(resource)
-                .orderBy(ordering)
-                .where(predicate)
-                .using(manager)
-                .executeLocally();
+        function setLookups() {
+            service.lookupCachedData = {
+            };
         }
+
 
         function _queryFailed(error) {
             var msg = config.appErrorPrefix + 'Error retrieving data.' + error.message;
@@ -69,8 +70,15 @@
             return _areItemsLoaded('sessions', value);
         }
 
-        function _areAttendeesLoaded(value) {
-            return _areItemsLoaded('attendees', value);
+        function _isPlayerLoaded(value) {
+            return _areItemsLoaded('player', value);
+        }
+
+        function _areItemsLoaded(key, value) {
+            if (value === undefined) {
+                return storeMeta.isLoaded[key]; // get
+            }
+            return storeMeta.isLoaded[key] = value; // set
         }
 
     }

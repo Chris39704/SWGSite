@@ -1,12 +1,12 @@
 ﻿<div data-ng-controller="sidebar as vm">
-    <ul id="sidebar_menu" class="sidebar-nav fixed-top" data-ng-if="vm.auth.isAuthenticated()">
+    <ul id="sidebar_menu" class="sidebar-nav" data-ng-show="vm.auth.isAuthenticated()">
         <li class="sidebar-brand">
             <a id="menu-toggle" style="text-shadow: none !important; height:100%;" data-ng-click="toggleSide()">
                 <i id="main_icon" class="fas fa-2x fa-angle-double-left fa-pull-right" style="margin-right: -15px !important;"></i>
             </a>
         </li>
     </ul>
-    <ul class="sidebar-nav" id="sidebar" data-ng-if="vm.auth.isAuthenticated()">
+    <ul class="sidebar-nav" id="sidebar" data-ng-show="vm.auth.isAuthenticated()">
         <li class="fade-selection-animation" data-ng-class="vm.isCurrent(r)" data-ng-repeat="r in vm.navRoutes">
             <a href="{{r.url}}" data-ng-bind-html="r.config.settings.content"></a>
         </li>
